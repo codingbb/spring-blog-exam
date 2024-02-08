@@ -17,11 +17,27 @@ public class BoardController {
     private final BoardRepository boardRepository;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request) {
-
-        List<Board> boardList = boardRepository.findAll();
+    public String index(HttpServletRequest request, @RequestParam(defaultValue = "0") int page) {
+        System.out.println("페이지 : " + page);
+        List<Board> boardList = boardRepository.findAll(page);
         //가방에 담기
         request.setAttribute("boardList", boardList);
+
+        int currentPage = page;
+        int nextPage = currentPage + 1;
+        int prevPage = currentPage - 1;
+        request.setAttribute("nextPage", nextPage);
+        request.setAttribute("prevPage", prevPage);
+
+        boolean first = currentPage == 0 ? true : false;
+
+        //lastpage는 db조회 필요 count
+        int totalPage = boardRepository.count();
+        int totalCount = totalPage / 5;
+        boolean last = currentPage == totalCount ? true : false;
+
+        request.setAttribute("first", first);
+        request.setAttribute("last", last);
 
         return "index";
     }

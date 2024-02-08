@@ -4,3 +4,10 @@ insert into board_tb(title, content, author, created_at) values('제목3', '내�
 insert into board_tb(title, content, author, created_at) values('제목4', '내용4', '이소연', now());
 insert into board_tb(title, content, author, created_at) values('제목5', '내용5', '류재성', now());
 insert into board_tb(title, content, author, created_at) values('제목6', '내용6', '송민경', now());
+insert into board_tb(title, content, author, created_at) values('제목7', '내용7', '갸라도스', now());
+insert into board_tb(title, content, author, created_at) values('제목8', '내용8', '나몰빼미', now());
+insert into board_tb(title, content, author, created_at) values('제목9', '내용9', '이상해씨', now());
+insert into board_tb(title, content, author, created_at) values('제목10', '내용10', 'c3반', now());
+insert into board_tb(title, content, author, created_at) values('제목11', '내용11', '공지영', now());
+insert into board_tb(title, content, author, created_at) values('제목12', '내용12', '심유주', now());
+insert into board_tb(title, content, author, created_at) values('오늘', '생일축하드려요', '김주혁', now());
