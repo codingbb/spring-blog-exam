@@ -37,8 +37,16 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(){
+    public String save(BoardRequest.SaveDTO requestDTO){
+        System.out.println(requestDTO);
 
+        //인증 체크
+        if (requestDTO.getTitle().length() > 20 && requestDTO.getContent().length() > 20) {
+            return "error/400";
+        }
+
+        //모델 위임
+        boardRepository.save(requestDTO);
 
         return "redirect:/";
     }
