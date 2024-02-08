@@ -32,7 +32,11 @@ public class BoardController {
     }
 
     @GetMapping("/board/{id}/updateForm")
-    public String updateForm(@PathVariable int id) {
+    public String updateForm(@PathVariable int id, HttpServletRequest request) {
+
+        Board board = boardRepository.findById(id);
+        request.setAttribute("board", board);
+
         return "board/updateForm";
     }
 
@@ -40,8 +44,8 @@ public class BoardController {
     public String save(BoardRequest.SaveDTO requestDTO){
         System.out.println(requestDTO);
 
-        //인증 체크
-        if (requestDTO.getTitle().length() > 20 && requestDTO.getContent().length() > 20) {
+        //유효성 검사 체크
+        if (requestDTO.getTitle().length() > 20 || requestDTO.getContent().length() > 20) {
             return "error/400";
         }
 
@@ -52,7 +56,14 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable int id){
+    public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
+
+        if (requestDTO.getTitle().length() > 20 || requestDTO.getContent().length() > 20) {
+            return "error/400";
+        }
+
+        boardRepository.update(id, requestDTO);
+
         return "redirect:/";
     }
 
